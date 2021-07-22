@@ -12,7 +12,7 @@ from src.support_vector_machine import SupportVectorMachine
 
 def svm_run():
     """
-        Run support vector machine
+        Run support vector machine class
     """
     dataset = read_in(
         'https://raw.githubusercontent.com/EKU-Summer-2021/ml-assignment-Lovely631/master/data/avocado.csv')
@@ -45,7 +45,7 @@ def svm_run():
 
 def dt_run():
     """
-        Run decision tree
+        Run decision tree class
     """
     dataset = read_in('https://raw.githubusercontent.com/EKU-Summer-2021/ml-assignment-Lovely631/master/data/heart.csv')
     print(dataset)
@@ -75,5 +75,5 @@ def dt_run():
 
 
 if __name__ == '__main__':
-    # svm_run()
-    dt_run()
+    svm_run()
+    # dt_run()

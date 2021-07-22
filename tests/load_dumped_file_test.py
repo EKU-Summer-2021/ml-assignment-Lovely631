@@ -1,5 +1,5 @@
 """
-    Read csv data test
+    Load dumped file test class
 """
 
 import unittest
@@ -15,12 +15,12 @@ from src.support_vector_machine import SupportVectorMachine
 
 class LoadDumpedFileTest(unittest.TestCase):
     """
-        Load dumped file class
+        Load dumped file test
     """
 
     def test_load_dumped_file(self):
         """
-            Unit test for csv read in
+            Unit test for dumped file
         """
         dataset = read_in(
             'https://raw.githubusercontent.com/EKU-Summer-2021/ml-assignment-Lovely631/master/data/avocado.csv')

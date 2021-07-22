@@ -1,11 +1,10 @@
 """
-    Read csv data test
+    Support vector machine test class - regression
 """
-
+import os
 import unittest
 
 from sklearn.svm import SVR
-
 from src.make_directory import make_directory
 from src.read_in import read_in
 from src.reformat_avocado_dataset import reformat_avocado_dataset
@@ -14,7 +13,7 @@ from src.support_vector_machine import SupportVectorMachine
 
 class SupportVectorMachineTest(unittest.TestCase):
     """
-        Support vector machine class test
+        Support vector machine test
     """
 
     def test_svm(self):
@@ -43,5 +42,31 @@ class SupportVectorMachineTest(unittest.TestCase):
         expected = True
         # when
         actual = isinstance(svm.grid_search(param_grid), SVR)
+        # then
+        self.assertEqual(expected, actual)
+
+    def test_dump_results(self):
+        """
+            Dump results into a file test
+        """
+        dataset = read_in(
+            'https://raw.githubusercontent.com/EKU-Summer-2021/ml-assignment-Lovely631/master/data/avocado.csv')
+        reformatted_dataset = reformat_avocado_dataset(dataset)
+        param_grid = [{
+            'kernel': ['rbf'],
+            'gamma': [1],
+            'C': [0.1],
+            'epsilon': [0.2]
+        }
+        ]
+
+        path_to_svm_directory = make_directory('svm')
+        svm = SupportVectorMachine(reformatted_dataset, param_grid, path_to_svm_directory)
+        reach_file_path = svm.dump_results()
+
+        # given
+        expected = True
+        # when
+        actual = os.path.isfile(reach_file_path)
         # then
         self.assertEqual(expected, actual)

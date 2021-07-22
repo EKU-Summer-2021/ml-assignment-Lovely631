@@ -1,5 +1,5 @@
 """
-    Support vector machine module
+    Support vector machine - regression
 """
 
 import os

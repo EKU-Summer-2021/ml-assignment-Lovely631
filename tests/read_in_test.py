@@ -5,18 +5,19 @@
 import unittest
 
 import pandas as pd
+
 from src.read_in import read_in
 
 
 class CsvReadDataTest(unittest.TestCase):
-    '''
+    """
         CSV read in test
-    '''
+    """
 
     def test_read_csv(self):
-        '''
+        """
             Unit test for csv read in
-        '''
+        """
         # given
         expected = True
         # when

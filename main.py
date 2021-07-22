@@ -75,5 +75,5 @@ def dt_run():
 
 
 if __name__ == '__main__':
-    svm_run()
-    # dt_run()
+    # svm_run()
+    dt_run()

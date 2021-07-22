@@ -5,6 +5,7 @@
 import unittest
 
 from sklearn.svm import SVR
+
 from src.make_directory import make_directory
 from src.read_in import read_in
 from src.reformat_avocado_dataset import reformat_avocado_dataset
@@ -15,6 +16,7 @@ class SupportVectorMachineTest(unittest.TestCase):
     """
         Support vector machine class test
     """
+
     def test_svm(self):
         """
             SVM test

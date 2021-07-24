@@ -1,5 +1,5 @@
 """
-    Using pickle to load dumped svr model configuration from the file
+    Using pickle to load dumped model configuration from the file
 """
 
 import pickle
@@ -7,7 +7,7 @@ import pickle
 
 def load_dumped_file(path):
     """
-        Load svr model configuration from file
+        Load model configuration from file
     """
     with open(path, 'rb') as file:
         loaded_model = pickle.load(file)

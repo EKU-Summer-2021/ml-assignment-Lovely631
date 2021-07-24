@@ -6,6 +6,7 @@ import unittest
 from unittest import mock
 
 from sklearn.svm import SVR
+
 from src.make_directory import make_directory
 from src.read_in import read_in
 from src.reformat_avocado_dataset import reformat_avocado_dataset

@@ -17,6 +17,7 @@ class DecisionTree:
     """
         Decision tree class
     """
+
     def __init__(self, dataframe: pd.DataFrame, param_grid, path):
         self.dataframe = dataframe
         self.path = path

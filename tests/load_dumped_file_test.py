@@ -4,13 +4,12 @@
 
 import unittest
 
-from sklearn.svm import SVR
+from sklearn.tree import DecisionTreeClassifier
 
+from src.decision_tree import DecisionTree
 from src.load_dumped_file import load_dumped_file
 from src.make_directory import make_directory
 from src.read_in import read_in
-from src.reformat_avocado_dataset import reformat_avocado_dataset
-from src.support_vector_machine import SupportVectorMachine
 
 
 class LoadDumpedFileTest(unittest.TestCase):
@@ -23,28 +22,27 @@ class LoadDumpedFileTest(unittest.TestCase):
             Unit test for dumped file
         """
         dataset = read_in(
-            'https://raw.githubusercontent.com/EKU-Summer-2021/ml-assignment-Lovely631/master/data/avocado.csv')
-        reformatted_dataset = reformat_avocado_dataset(dataset)
+            'https://raw.githubusercontent.com/EKU-Summer-2021/ml-assignment-Lovely631/master/data/heart.csv')
         print(dataset)
 
         param_grid = [{
-            'kernel': ['rbf'],
-            'gamma': [1],
-            'C': [0.1],
-            'epsilon': [0.2]
+            'criterion': ['gini', 'entropy'],
+            'max_depth': [3, 5, 7, 10, 14, 15],
+            'min_samples_split': [6, 10, 14, 15, 20],
+            'min_samples_leaf': [7, 11, 15, 20, 25]
         }
         ]
 
-        path_to_svm_directory = make_directory('svm')
-        svm = SupportVectorMachine(reformatted_dataset, param_grid, path_to_svm_directory)
+        path_to_dt_directory = make_directory('dt')
+        decision_tree = DecisionTree(dataset, param_grid, path_to_dt_directory)
 
-        reach_file_path = svm.dump_results()
+        reach_file_path = decision_tree.dump_results()
 
         load_results = load_dumped_file(reach_file_path)
 
         # given
         expected = True
         # when
-        actual = isinstance(load_results, SVR)
+        actual = isinstance(load_results, DecisionTreeClassifier)
         # then
         self.assertEqual(expected, actual)

@@ -88,7 +88,7 @@ class SupportVectorMachine:
             'Predicted Values': y_prediction})
         return real_predicted_values_dataframe
 
-    def plot(self, dataframe):
+    def plot(self, dataframe: pd.DataFrame):
         """
             Plotting the x and y
         """

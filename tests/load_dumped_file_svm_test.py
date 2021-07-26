@@ -44,7 +44,7 @@ class LoadDumpedFileTest(unittest.TestCase):
         # given
         expected = True
         self.svm.best_estimator_from_grid_search_or_existing_load()
-        path = self.svm._SupportVectorMachine__dump_results()
+        path = self.svm._SupportVectorMachine__dump_results_of_grid_search()
         load_results = load_dumped_file(path)
         print(load_results)
         # when

@@ -5,8 +5,8 @@
 import pandas as pd
 from src.make_directory import make_directory
 from src.read_in import read_in
-from src.support_vector_machine_with_regression.reformat_avocado_dataset import reformat_avocado_dataset
-from src.support_vector_machine_with_regression.support_vector_machine import SupportVectorMachine
+from src.reformat_avocado_dataset import reformat_avocado_dataset
+from src.support_vector_machine import SupportVectorMachine
 
 
 def svm_run():

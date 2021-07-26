@@ -5,7 +5,7 @@
 import pandas as pd
 
 from src.make_directory import make_directory
-from src.read_in import read_in
+from src.read_in import read_in_csv
 from src.reformat_avocado_dataset import reformat_avocado_dataset
 from src.support_vector_machine import SupportVectorMachine
 
@@ -19,7 +19,7 @@ def svm_run():
     pd.set_option("max_colwidth", None)
     pd.set_option("expand_frame_repr", False)
 
-    dataset = read_in(
+    dataset = read_in_csv(
         'https://raw.githubusercontent.com/EKU-Summer-2021/ml-assignment-Lovely631/master/data/avocado.csv')
     reformatted_dataset = reformat_avocado_dataset(dataset)
     print(dataset)
@@ -41,9 +41,9 @@ def svm_run():
     svm.best_estimator_from_grid_search_or_existing_load(path)
 
     # dataframe_of_real_and_predicted_values = svm.real_and_predicted_values()
-    dataframe_of_real_and_predicted_values = svm.real_and_predicted_values(path)
-    svm.plot(dataframe_of_real_and_predicted_values)
-    svm.plot_line(dataframe_of_real_and_predicted_values)
+    dataframe_of_real_and_predicted_values = svm.put_real_and_predicted_values_into_dataframe(path)
+    svm.plot_total_volume_and_real_value(dataframe_of_real_and_predicted_values)
+    svm.plot_real_and_predicted_value(dataframe_of_real_and_predicted_values)
 
 
 if __name__ == '__main__':

@@ -9,7 +9,7 @@ import pandas as pd
 from sklearn.svm import SVR
 
 from src.make_directory import make_directory
-from src.read_in import read_in
+from src.read_in import read_in_csv
 from src.reformat_avocado_dataset import reformat_avocado_dataset
 from src.support_vector_machine import SupportVectorMachine
 
@@ -23,7 +23,7 @@ class SupportVectorMachineTest(unittest.TestCase):
         """
             Contains svm run for testing
         """
-        self.dataset = read_in(
+        self.dataset = read_in_csv(
             'https://raw.githubusercontent.com/EKU-Summer-2021/ml-assignment-Lovely631/master/data/avocado.csv')
         reformatted_dataset = reformat_avocado_dataset(self.dataset)
         param_grid = [{
@@ -65,20 +65,20 @@ class SupportVectorMachineTest(unittest.TestCase):
         # then
         self.assertEqual(expected, actual)
 
-    def test_dump_results(self):
+    def test_dump_results_of_grid_search(self):
         """
             Dump results into a file test
         """
 
         # given
         expected = True
-        path = self.svm._SupportVectorMachine__dump_results()
+        path = self.svm._SupportVectorMachine__dump_results_of_grid_search()
         # when
         actual = os.path.isfile(path)
         # then
         self.assertEqual(expected, actual)
 
-    def test_grid_search_save_best(self):
+    def test_save_best_grid_search_results(self):
         """
             Grid search best results save test
         """
@@ -86,11 +86,11 @@ class SupportVectorMachineTest(unittest.TestCase):
         # given
         expected = True
         # when
-        actual = isinstance(self.svm._SupportVectorMachine__grid_search_save_best(), pd.DataFrame)
+        actual = isinstance(self.svm._SupportVectorMachine__save_best_grid_search_results(), pd.DataFrame)
         # then
         self.assertEqual(expected, actual)
 
-    def test_real_and_predicted_values(self):
+    def test_put_real_and_predicted_values_into_dataframe(self):
         """
             Dataframe which stores real and predicted y values
         """
@@ -98,6 +98,6 @@ class SupportVectorMachineTest(unittest.TestCase):
         # given
         expected = True
         # when
-        actual = isinstance(self.svm.real_and_predicted_values(), pd.DataFrame)
+        actual = isinstance(self.svm.put_real_and_predicted_values_into_dataframe(), pd.DataFrame)
         # then
         self.assertEqual(expected, actual)

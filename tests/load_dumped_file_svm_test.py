@@ -8,7 +8,7 @@ from sklearn.model_selection import GridSearchCV
 
 from src.load_dumped_file import load_dumped_file
 from src.make_directory import make_directory
-from src.read_in import read_in
+from src.read_in import read_in_csv
 from src.reformat_avocado_dataset import reformat_avocado_dataset
 from src.support_vector_machine import SupportVectorMachine
 
@@ -22,7 +22,7 @@ class LoadDumpedFileTest(unittest.TestCase):
         """
             Contains svm run for testing
         """
-        self.dataset = read_in(
+        self.dataset = read_in_csv(
             'https://raw.githubusercontent.com/EKU-Summer-2021/ml-assignment-Lovely631/master/data/avocado.csv')
         reformatted_dataset = reformat_avocado_dataset(self.dataset)
         param_grid = [{

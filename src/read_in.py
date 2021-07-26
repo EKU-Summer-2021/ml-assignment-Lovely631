@@ -5,7 +5,7 @@
 import pandas as pd
 
 
-def read_in(data):
+def read_in_csv(data):
     """
         Read in function from csv
     """

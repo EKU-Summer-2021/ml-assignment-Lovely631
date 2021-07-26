@@ -27,11 +27,11 @@ class SupportVectorMachine:
         self.path = path
         self.sc_x = StandardScaler()
         self.sc_y = StandardScaler()
-        self.x_train, self.x_test, self.y_train, self.y_test = self.split_dataset_train_test()
+        self.x_train, self.x_test, self.y_train, self.y_test = self.split_dataset_to_train_and_test()
         self.grid_svr: GridSearchCV
         self.model = self.best_estimator_from_grid_search_or_existing_load
 
-    def split_dataset_train_test(self):
+    def split_dataset_to_train_and_test(self):
         """
             Splitting the dataframe into train and test
         """
@@ -55,12 +55,12 @@ class SupportVectorMachine:
         if path is not None:
             model = load_dumped_file(path)
         else:
-            model = self.__grid_search(self.param_grid)
-            self.__dump_results()
-            self.__grid_search_save_best()
+            model = self.__grid_search_with_svr_model(self.param_grid)
+            self.__dump_results_of_grid_search()
+            self.__save_best_grid_search_results()
         return model.best_estimator_
 
-    def __grid_search(self, param_grid):
+    def __grid_search_with_svr_model(self, param_grid):
         """
             Finds the best SVR model with GridSearchCv
         """
@@ -70,7 +70,7 @@ class SupportVectorMachine:
         self.grid_svr = grid_svr
         return self.grid_svr
 
-    def __dump_results(self):
+    def __dump_results_of_grid_search(self):
         """
             Using pickle to dump running results in a file
         """
@@ -80,7 +80,7 @@ class SupportVectorMachine:
             pickle.dump(self.grid_svr, file)
         return done_path
 
-    def __grid_search_save_best(self):
+    def __save_best_grid_search_results(self):
         """
             Choosing the best result and creating a csv file
         """
@@ -89,7 +89,7 @@ class SupportVectorMachine:
         results.to_csv(self.path + "/best_result_of_grid_search.csv")
         return results
 
-    def real_and_predicted_values(self, path=None):
+    def put_real_and_predicted_values_into_dataframe(self, path=None):
         """
             Creating dataframe which stores real and predicted y values
         """
@@ -110,7 +110,7 @@ class SupportVectorMachine:
         print("MSE:", mean_squared_error(y, y_prediction))
         return real_predicted_values_dataframe
 
-    def plot(self, dataframe: pd.DataFrame):
+    def plot_total_volume_and_real_value(self, dataframe: pd.DataFrame):
         """
             Plotting the x and y
         """
@@ -122,7 +122,7 @@ class SupportVectorMachine:
         plt.savefig(self.path + "/SVM - Total Volume and Real Value.png")
         plt.show()
 
-    def plot_line(self, dataframe: pd.DataFrame):
+    def plot_real_and_predicted_value(self, dataframe: pd.DataFrame):
         """
             Plotting the real y and the predicted y
         """

@@ -2,17 +2,22 @@
     Main module
 """
 
-from src.load_dumped_file import load_dumped_file
+import pandas as pd
 from src.make_directory import make_directory
 from src.read_in import read_in
-from src.reformat_avocado_dataset import reformat_avocado_dataset
-from src.support_vector_machine import SupportVectorMachine
+from src.support_vector_machine_with_regression.reformat_avocado_dataset import reformat_avocado_dataset
+from src.support_vector_machine_with_regression.support_vector_machine import SupportVectorMachine
 
 
 def svm_run():
     """
         Run support vector machine class
     """
+
+    pd.set_option("max_columns", None)
+    pd.set_option("max_colwidth", None)
+    pd.set_option("expand_frame_repr", False)
+
     dataset = read_in(
         'https://raw.githubusercontent.com/EKU-Summer-2021/ml-assignment-Lovely631/master/data/avocado.csv')
     reformatted_dataset = reformat_avocado_dataset(dataset)
@@ -28,16 +33,14 @@ def svm_run():
 
     path_to_svm_directory = make_directory('svm')
     svm = SupportVectorMachine(reformatted_dataset, param_grid, path_to_svm_directory)
+    # svm.split_dataset_train_test()
 
-    svm.grid_search_best()
-    reach_file_path = svm.dump_results()
+    path = 'result/svm/2021-07-26_16-01-18/all_result_of_grid_search'
+    # svm.best_estimator_from_grid_search_or_existing_load()
+    svm.best_estimator_from_grid_search_or_existing_load(path)
 
-    load_results = load_dumped_file(reach_file_path)
-    print(load_results)
-
-    dataframe_of_real_and_predicted_values = svm.real_and_predicted_values()
-    print(dataframe_of_real_and_predicted_values)
-
+    # dataframe_of_real_and_predicted_values = svm.real_and_predicted_values()
+    dataframe_of_real_and_predicted_values = svm.real_and_predicted_values(path)
     svm.plot(dataframe_of_real_and_predicted_values)
     svm.plot_line(dataframe_of_real_and_predicted_values)
 

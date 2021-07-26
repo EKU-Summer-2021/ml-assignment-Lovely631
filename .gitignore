@@ -8,3 +8,5 @@ Pipfile.lock
 .idea
 
 **/__pycache__
+/result/
+/tests/support_vector_machine_with_regression_test/result/

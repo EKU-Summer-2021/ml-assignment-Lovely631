@@ -38,7 +38,6 @@ class SupportVectorMachineTest(unittest.TestCase):
         self.svm = SupportVectorMachine(reformatted_dataset, param_grid, self.path_to_svm_directory)
         self.svm.best_estimator_from_grid_search_or_existing_load()
 
-
     def test_grid_search_without_path(self):
         """
             SVM test
@@ -88,5 +87,17 @@ class SupportVectorMachineTest(unittest.TestCase):
         expected = True
         # when
         actual = isinstance(self.svm._SupportVectorMachine__grid_search_save_best(), pd.DataFrame)
+        # then
+        self.assertEqual(expected, actual)
+
+    def test_real_and_predicted_values(self):
+        """
+            Dataframe which stores real and predicted y values
+        """
+
+        # given
+        expected = True
+        # when
+        actual = isinstance(self.svm.real_and_predicted_values(), pd.DataFrame)
         # then
         self.assertEqual(expected, actual)

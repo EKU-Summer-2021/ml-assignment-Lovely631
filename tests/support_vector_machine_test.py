@@ -5,6 +5,7 @@ import os
 import sys
 import unittest
 
+import pandas as pd
 from sklearn.svm import SVR
 
 from src.make_directory import make_directory
@@ -35,6 +36,8 @@ class SupportVectorMachineTest(unittest.TestCase):
 
         self.path_to_svm_directory = make_directory('svm')
         self.svm = SupportVectorMachine(reformatted_dataset, param_grid, self.path_to_svm_directory)
+        self.svm.best_estimator_from_grid_search_or_existing_load()
+
 
     def test_grid_search_without_path(self):
         """
@@ -70,9 +73,20 @@ class SupportVectorMachineTest(unittest.TestCase):
 
         # given
         expected = True
-        self.svm.best_estimator_from_grid_search_or_existing_load()
         path = self.svm._SupportVectorMachine__dump_results()
         # when
         actual = os.path.isfile(path)
+        # then
+        self.assertEqual(expected, actual)
+
+    def test_grid_search_save_best(self):
+        """
+            Grid search best results save test
+        """
+
+        # given
+        expected = True
+        # when
+        actual = isinstance(self.svm._SupportVectorMachine__grid_search_save_best(), pd.DataFrame)
         # then
         self.assertEqual(expected, actual)

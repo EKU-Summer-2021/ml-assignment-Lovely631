@@ -44,9 +44,9 @@ class SupportVectorMachine:
         y_scaled = self.sc_y.fit_transform(y_column.reshape(-1, 1))  # average price
         logger.debug(x_columns)
         logger.debug(y_column)
-        logger.debug("%s%s" % (x_scaled[:, 0].shape, y_scaled.shape))
+        logger.debug("%s%s", x_scaled[:, 0].shape, y_scaled.shape)
         x_train, x_test, y_train, y_test = train_test_split(x_scaled, y_scaled, test_size=0.33)
-        logger.debug("%s%s%s%s" % (x_train.shape, x_test.shape, y_train.shape, y_test.shape))
+        logger.debug("%s%s%s%s", x_train.shape, x_test.shape, y_train.shape, y_test.shape)
         return x_train, x_test, y_train, y_test
 
     def best_estimator_from_grid_search_or_existing_load(self, path=None):

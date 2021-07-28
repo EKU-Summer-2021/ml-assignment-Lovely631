@@ -9,7 +9,6 @@ from src.make_directory import make_directory
 from src.mlp_classifier import MlpClassifier
 from src.mlp_regressor import MlpRegressor
 from src.read_in import read_in_csv
-# from src.reformat_mlp_regressor_dataset import reformat_mlp_regressor_dataset
 from src.reformat_avocado_dataset import reformat_avocado_dataset
 from src.support_vector_machine import SupportVectorMachine
 
@@ -36,22 +35,20 @@ def support_vector_machine_with_regression_run():
     }
     ]
     path_to_svm_directory = make_directory('svm')
-    '''
-        Run without path
-    '''
 
-    # svm = SupportVectorMachine(reformatted_dataset, param_grid, path_to_svm_directory)
+    # Run without path
+
+    svm = SupportVectorMachine(reformatted_dataset, param_grid, path_to_svm_directory)
     # svm.split_dataset_to_train_and_test()
-    # svm.best_estimator_from_grid_search_or_existing_load()
-    # dataframe_of_real_and_predicted_values = svm.put_real_and_predicted_values_into_dataframe()
-    '''
-        Run with path
-    '''
+    svm.best_estimator_from_grid_search_or_existing_load()
+    dataframe_of_real_and_predicted_values = svm.put_real_and_predicted_values_into_dataframe()
 
-    path = 'result/svm/2021-07-28_08-14-20/dumped_all_result_of_grid_search'
-    svm = SupportVectorMachine(reformatted_dataset, param_grid, path_to_svm_directory, path)
-    svm.best_estimator_from_grid_search_or_existing_load(path)
-    dataframe_of_real_and_predicted_values = svm.put_real_and_predicted_values_into_dataframe(path)
+    # Run with path
+
+    # path = 'result/svm/2021-07-28_08-14-20/dumped_all_result_of_grid_search'
+    # svm = SupportVectorMachine(reformatted_dataset, param_grid, path_to_svm_directory, path)
+    # svm.best_estimator_from_grid_search_or_existing_load(path)
+    # dataframe_of_real_and_predicted_values = svm.put_real_and_predicted_values_into_dataframe(path)
 
     svm.plot_total_volume_and_real_value(dataframe_of_real_and_predicted_values)
     svm.plot_real_and_predicted_value(dataframe_of_real_and_predicted_values)
@@ -74,22 +71,20 @@ def decision_tree_with_classification_run():
     }
     ]
     path_to_dt_directory = make_directory('dt')
-    '''
-        Run without path
-    '''
 
-    # decision_tree = DecisionTree(dataset, param_grid, path_to_dt_directory)
+    # Run without path
+
+    decision_tree = DecisionTree(dataset, param_grid, path_to_dt_directory)
     # decision_tree.split_dataset_to_train_and_test()
-    # decision_tree.best_estimator_from_grid_search_or_existing_load()
-    # confusion_matrix = decision_tree.create_confusion_matrix()
-    '''
-        Run with path
-    '''
+    decision_tree.best_estimator_from_grid_search_or_existing_load()
+    confusion_matrix = decision_tree.create_confusion_matrix()
 
-    path = 'result/dt/2021-07-28_08-51-42/dumped_all_result_of_grid_search'
-    decision_tree = DecisionTree(dataset, param_grid, path_to_dt_directory, path)
-    decision_tree.best_estimator_from_grid_search_or_existing_load(path)
-    confusion_matrix = decision_tree.create_confusion_matrix(path)
+    # Run with path
+
+    # path = 'result/dt/2021-07-28_08-51-42/dumped_all_result_of_grid_search'
+    # decision_tree = DecisionTree(dataset, param_grid, path_to_dt_directory, path)
+    # decision_tree.best_estimator_from_grid_search_or_existing_load(path)
+    # confusion_matrix = decision_tree.create_confusion_matrix(path)
 
     print('Confusion matrix:\n', confusion_matrix)
 
@@ -106,7 +101,8 @@ def multilayer_perceptron_regressor_run():
         'https://raw.githubusercontent.com/EKU-Summer-2021/ml-assignment-Lovely631/master/data/avocado.csv')
     reformatted_dataset = reformat_avocado_dataset(dataset)
 
-    # dataset = read_in_csv('https://raw.githubusercontent.com/EKU-Summer-2021/ml-assignment-Lovely631/master/data/water_potability.csv')
+    # dataset = read_in_csv(
+    # 'https://raw.githubusercontent.com/EKU-Summer-2021/ml-assignment-Lovely631/master/data/water_potability.csv')
     # reformatted_dataset = reformat_mlp_regressor_dataset(dataset)
     # print(dataset)
 
@@ -120,17 +116,15 @@ def multilayer_perceptron_regressor_run():
     ]
 
     path_to_mlp_regressor_directory = make_directory('mlp_regressor')
-    '''
-        Run without path
-    '''
+
+    # Run without path
 
     mlp_regressor = MlpRegressor(reformatted_dataset, param_grid, path_to_mlp_regressor_directory)
     # mlp_regressor.split_dataset_to_train_and_test()
     mlp_regressor.best_estimator_from_grid_search_or_existing_load()
     dataframe_of_real_and_predicted_values = mlp_regressor.put_real_and_predicted_values_into_dataframe()
-    '''
-        Run with path
-    '''
+
+    # Run with path
 
     # path = ''
     # mlp_regressor = SupportVectorMachine(reformatted_dataset, param_grid, path_to_svm_directory, path)
@@ -141,7 +135,7 @@ def multilayer_perceptron_regressor_run():
     mlp_regressor.plot_real_and_predicted_value(dataframe_of_real_and_predicted_values)
 
 
-def multilayer_perceptrom_classifier_run():
+def multilayer_perceptron_classifier_run():
     '''
         Multilayer perceptron classifier class
     '''
@@ -159,18 +153,15 @@ def multilayer_perceptrom_classifier_run():
     ]
 
     path_to_mlp_regressor_directory = make_directory('mlp_regressor')
-    '''
-        Run without path
-    '''
+
+    # Run without path
 
     mlp_classifier = MlpClassifier(dataset, param_grid, path_to_mlp_regressor_directory)
     # mlp_classifier.split_dataset_to_train_and_test()
     mlp_classifier.best_estimator_from_grid_search_or_existing_load()
     mlp_classifier.create_confusion_matrix()
 
-    '''
-        Run with path
-    '''
+    # Run with path
 
     # path = ''
     # mlp_classifier = SupportVectorMachine(reformatted_dataset, param_grid, path_to_svm_directory, path)
@@ -184,4 +175,4 @@ if __name__ == '__main__':
     support_vector_machine_with_regression_run()
     decision_tree_with_classification_run()
     multilayer_perceptron_regressor_run()
-    multilayer_perceptrom_classifier_run()
+    multilayer_perceptron_classifier_run()

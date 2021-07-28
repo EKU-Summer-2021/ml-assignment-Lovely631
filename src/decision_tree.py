@@ -41,7 +41,7 @@ class DecisionTree:
         logger.debug(x_columns)
         logger.debug(y_column)
         x_train, x_test, y_train, y_test = train_test_split(x_columns, y_column, test_size=0.33)
-        logger.debug("%s%s%s%s" % (x_train.shape, x_test.shape, y_train.shape, y_test.shape))
+        logger.debug("%s%s%s%s", x_train.shape, x_test.shape, y_train.shape, y_test.shape)
         return x_train, x_test, y_train, y_test
 
     def best_estimator_from_grid_search_or_existing_load(self, path=None):
